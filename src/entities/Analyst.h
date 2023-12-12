@@ -35,6 +35,32 @@ void Analyst::init() {
     print("create HE parameters and HE context");
 
     SEALContext context = get_context();
+    // A generates their key
+    // Run HHE.KeyGen -> (pkA, skA, evkA)
+    //Use Encryption Parameters for the Analyst
+    KeyGenerator keygen(context);
+    SecretKey he_sk = keygen.secret_key();      //HE Decryption Key
+    
+//--- Todo: rewrite myself!!!!
+    // keygen.create_public_key(Analyst.he_pk);
+    // keygen.create_relin_keys(Analyst.he_rk);
+    // BatchEncoder analyst_he_benc(*context);
+    // Encryptor analyst_he_enc(*context, Analyst.he_pk);
+    // Evaluator analyst_he_eval(*context);
+    // bool use_bsgs = false;
+    // vector<int> gk_indices = add_gk_indices(use_bsgs, analyst_he_benc);
+    // keygen.create_galois_keys(gk_indices, Analyst.he_gk);
+    // print_line(__LINE__);
+    // // Decryptor analyst_he_dec(*context, Analyst.he_sk);
+    // print_line(__LINE__);
+    // cout << "Analyst encrypts his weights and biases" << endl;
+    // print_vec(Analyst.w, Analyst.w.size(), "Analyst.w");
+    // print_vec(Analyst.b, Analyst.b.size(), "Analyst.b");
+    // Analyst.w_c = encrypting(Analyst.w, Analyst.he_pk, analyst_he_benc, analyst_he_enc);
+    // Analyst.b_c = encrypting(Analyst.b, Analyst.he_pk, analyst_he_benc, analyst_he_enc);
+    // vector<int64_t> w_d = decrypting(Analyst.w_c, Analyst.he_sk, analyst_he_benc, *context, Analyst.w.size());
+    // vector<int64_t> b_d = decrypting(Analyst.b_c, Analyst.he_sk, analyst_he_benc, *context, Analyst.b.size());
+//---
 
     cout << endl;
 }

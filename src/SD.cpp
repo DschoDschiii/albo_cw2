@@ -21,19 +21,9 @@ int main() {
     Analyst a(0);
     User u(0);
     CSP csp(0);
-    //--- test
-    SEALContext context = get_context();
-
-// --- SETUP ---
-// A generates their key
-// Run HHE.KeyGen -> (pkA, skA, evkA)
-    //Use Encryption Parameters for the Analyst
-    KeyGenerator keygen(context);
-    SecretKey he_sk = keygen.secret_key();      //HE Decryption Key
-    Serializable<PublicKey> he_pk = keygen.create_public_key();
     
-    // Users generate their symmetric keys
-    // SKE.KeyGen -> Ki
+    // --- SETUP ---
+
 
     // A send m1 to CSP
     // m1 = (t1, Enc(pkCSP, evk), sigA(H(t1||evk))))
