@@ -1,19 +1,26 @@
 #include "seal/seal.h"
+#include "Helper.h"
 
 using namespace std;
 using namespace seal;
 
 class Analyst{
     public:
-        Analyst(int64_t test);
+        PublicKey he_pk;
 
+        Analyst(int64_t test);
+        void generate_HHE_keys();
+        message send_m1();
+        message send_m3();
+        void receive_m4(message m4);
+        void decrypt_HHE();
+        void print_result();
     private:
         //--- Todo: from example read over 
         vector<int64_t> w{17, 31, 24, 17}; // dummy weights
         vector<int64_t> b{-5, -5, -5, -5}; // dummy biases
         Ciphertext w_c;                    // the encrypted weights
         Ciphertext b_c;                    // the encrypted biases
-        PublicKey he_pk;
         SecretKey he_sk;
         RelinKeys he_rk;
         GaloisKeys he_gk;
@@ -63,4 +70,34 @@ void Analyst::init() {
 //---
 
     cout << endl;
+}
+
+void Analyst::generate_HHE_keys() {
+    // should return (pkA, skA, evkA)
+}
+
+message Analyst::send_m1() {
+    message ret;
+    return ret;
+}
+
+message Analyst::send_m3() {
+    message ret;
+    return ret;
+}
+
+void Analyst::receive_m4(message m4) {
+    
+    // decrypt result
+    decrypt_HHE();
+}
+
+// 1. Decrypt results using the secret key sk and SEAL decrypt function
+//--- "PASTA_SEAL::decrypt_result()" to decrypt it.
+void Analyst::decrypt_HHE() {
+    // sets res
+}
+
+void Analyst::print_result() {
+
 }

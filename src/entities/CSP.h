@@ -11,6 +11,12 @@ class CSP {
         CSP(uint64_t test) {
             cout << "[CSP] Creating CSP" << endl;
         };
+        void receive_m1(message m1);
+        void receive_m2(message m2);
+        void decompose_HHE();
+        void receive_m3(message m3);
+        void evaluate_HHE();
+        message send_m4();
     
     private:
         void init();
@@ -54,4 +60,44 @@ void CSP::init() {
     // print_vec(decrypted_res, decrypted_res.size(), "decrypted result");
 //---
     cout << endl;
+}
+
+void CSP::receive_m1(message m1) {
+
+}
+
+void CSP::receive_m2(message m2) {
+    
+    // make useful
+    decompose_HHE();
+}
+
+// 1. Convert sym-enc data to homo-enc data
+// 1.1 Use HE_decrypt() (from hasta_3_seal.cpp)
+//      and the encrypted key
+//      it returns HE-based ciphertext (SEAL cipher): std::vector<Ciphertext>
+//      that can be further used for evalution by using SEAL and HE schemes like BFV and BGV.
+//--- 3. Send the encrypted data to the server and apply the Decomp() 
+//--- "PASTA_SEAL::HE_decrypt()" to convert symmetric ciphertexts to 
+//--- homomorphic ciphertexts.
+void CSP::decompose_HHE() {
+    // sets c_prime
+}
+
+void CSP::receive_m3(message m3) {
+
+    // do function
+    evaluate_HHE();
+}
+
+// 1. Do evaluation function and return ciphertext results to Analyst
+//--- 4. Apply the HE.Eval() to compute the result of addition or 
+//--- multiplication over the homomorphic ciphertexts.
+void CSP::evaluate_HHE() {
+    // sets c_res
+}
+
+message CSP::send_m4() {
+    message ret;
+    return ret;
 }

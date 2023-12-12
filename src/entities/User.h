@@ -1,9 +1,16 @@
 #include "seal/seal.h"
 
+using namespace std;
+using namespace seal;
+
 class User {
     public:
         unsigned int id = -1;
         User(uint64_t id);
+        void generate_SKE_key();
+        void encrypt_data();
+        void encrypt_HE_symmetric_key(PublicKey pk);
+        message send_m2();
     private:
         //--- Todo: from example read over
         vector<uint64_t> ssk; // the secret symmetric keys
@@ -29,10 +36,7 @@ User::User(uint64_t id_value): id(id_value) {
 
 void User::init() {
     print("--- User::init ---");
-    print("set secret symmetric key");
-    //--- Todo: using symm key from example!
-    ssk = get_symmetric_key();
-
+    
 //--- Todo: rewrite myself!!!!
     // print_vec(User.x_i, User.x_i.size(), "User.x_i");
     // print_line(__LINE__);
@@ -51,6 +55,40 @@ void User::init() {
 //---
 
     cout << endl;
+}
+
+void User::generate_SKE_key() {
+    //--- Todo: using symm key from example!
+    ssk = get_symmetric_key();
+    // is called Ki in the Report
+}
+
+// 1. Use PASTA (a symmetric cipher) to encrypt user's data.
+// 1.1 Get the symmetric key from the testvectors.h
+// 1.2 Encrypt user data using the symm-key and PASTA cipher (from pasta_3_plain.cpp)
+void User::encrypt_data() {
+
+}
+
+// 2. Encrypt the symm-key itself
+// 2.1 Get the Analyst public key 'pk'
+// 2.2 Use HE.Enc() to encrypt
+// ((one of them or both) available in seal.cpp)
+//--- 2. Use BFV schemes to encrypt the symmetric key with 
+//--- "PASTA_SEAL::encrypt_key()".
+void User::encrypt_HE_symmetric_key(PublicKey pk) {
+    // generate a shared symmetric key sk_evk 
+    // encrypt the evk using a symmetric key encryption algorithm like AES 
+    //  EncapsulatedEvk = SYM.Enc(sk_evk, evk); 
+    // Encrypt the symmetric key using PKI 
+    //  EncapSymKey = PKE.Enc(pkCSP, sk_evk); 
+    // Send both EncapsulatedEvk, and EncapSymKey to CSP
+
+}
+
+message User::send_m2() {
+    message ret;
+    return ret;
 }
 
 //--- Todo: replace by actually generating key ???
