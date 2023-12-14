@@ -1,4 +1,8 @@
 #include "seal/seal.h"
+#ifndef HHE_H
+#define HHE_H
+#include "HHE.h"
+#endif
 
 using namespace std;
 using namespace seal;
@@ -43,7 +47,7 @@ void User::generate_SKE_key() {
 // 1.2 Encrypt user data using the symm-key and PASTA cipher (from pasta_3_plain.cpp)
 void User::encrypt_data() {
     print("Encrypting data");
-    //PASTA_3::PASTA pasta(ssk, 65537); // Todo make work
+    PASTA_3::PASTA pasta(ssk, config::plain_mod); // Todo make work
     //pasta.encrypt(data);
     //--- Todo: rewrite myself!!!!
     // PASTA_3_MODIFIED_1::PASTA SymmetricEncryptor(User.ssk, config::plain_mod);

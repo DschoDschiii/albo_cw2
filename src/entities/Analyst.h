@@ -1,5 +1,8 @@
 #include "seal/seal.h"
-#include "Helper.h"
+#ifndef HHE_H
+#define HHE_H
+#include "HHE.h"
+#endif
 
 using namespace std;
 using namespace seal;
@@ -15,8 +18,7 @@ class Analyst{
         void receive_m4(message m4);
         void decrypt_HHE();
         void print_result();
-    private:
-        HHE hhe; // HHE instance
+    private:    
         SecretKey he_sk;                   // HE Decryption Key
         RelinKeys he_rk;
         GaloisKeys he_gk;
@@ -28,8 +30,6 @@ class Analyst{
 
 Analyst::Analyst() {
     print("Create Analyst");
-    vector<uint64_t> secret_key;
-    //hhe = HHE(secret_key);
 };
 
 void Analyst::generate_HHE_keys() {
@@ -37,7 +37,7 @@ void Analyst::generate_HHE_keys() {
     // A generates their key
     // Run HHE.KeyGen -> (pkA, skA, evkA)
     //Use Encryption Parameters for the Analyst
-    tuple<PublicKey, SecretKey, RelinKeys> ret = hhe.keyGen();
+    tuple<PublicKey, SecretKey, RelinKeys> ret = HHE::keyGen();
 
     he_pk = get<0>(ret);
     he_sk = get<1>(ret);

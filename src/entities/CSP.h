@@ -1,4 +1,8 @@
 #include "seal/seal.h"
+#ifndef HHE_H
+#define HHE_H
+#include "HHE.h"
+#endif
 
 class CSP {
     public:

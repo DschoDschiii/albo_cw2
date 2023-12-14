@@ -3,14 +3,12 @@
 #include <chrono>
 
 #include "seal/seal.h"
-
-#include "HHE.h"
-
-#include "./entities/Entities.h"
+#include "entities/Analyst.h"
+#include "entities/CSP.h"
+#include "entities/User.h"
 
 using namespace std;
 using namespace seal;
-
 
 // Generate the keys and shared variables here, so you can pass them 
 // to any entity you want based on the protocol flow 
