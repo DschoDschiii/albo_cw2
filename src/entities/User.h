@@ -18,7 +18,6 @@ class User {
         vector<uint64_t> c_i;        // symmetric encrypted x_i
         std::vector<Ciphertext> c_k; // the HE encrypted symmetric keys
 
-        void init();
         vector<uint64_t> get_symmetric_key();
 
         void print(string str){
@@ -27,38 +26,15 @@ class User {
 };
 
 User::User(uint64_t id_value): id(id_value) {
-    // Users generate their symmetric keys
-    // SKE.KeyGen -> Ki
     print("Creating user");
-
-    init();
-}
-
-void User::init() {
-    print("--- User::init ---");
-    
-//--- Todo: rewrite myself!!!!
-    // print_vec(User.x_i, User.x_i.size(), "User.x_i");
-    // print_line(__LINE__);
-    // cout << "User encrypts his data using the symmetric key" << endl;
-    // PASTA_3_MODIFIED_1::PASTA SymmetricEncryptor(User.ssk, config::plain_mod);
-    // User.c_i = SymmetricEncryptor.encrypt(User.x_i);
-    // print_vec(User.c_i, User.c_i.size(), "User.c_i");
-    // TEST::symmetric_data_encryption_test(User.x_i, User.c_i, SymmetricEncryptor);
-    // print_line(__LINE__);
-    // cout << "User encrypts his symmetric key using the Analyst's HE configurations" << endl;
-    // User.c_k = encrypt_symmetric_key(User.ssk, config::USE_BATCH, analyst_he_benc, analyst_he_enc);
-    // // cout << "User.c_k.size() = " << User.c_k.size() << endl;
-    // TEST::symmetric_key_he_encryption_test(User.c_k, User.ssk, config::USE_BATCH, context,
-    //                                        Analyst.he_sk, Analyst.he_pk, Analyst.he_rk, Analyst.he_gk,
-    //                                        analyst_he_benc, analyst_he_enc);
-//---
-
-    cout << endl;
+    vector<uint64_t> tmp_data = {0, 1, 2, 3};
+    data(tmp_data);
 }
 
 void User::generate_SKE_key() {
-    //--- Todo: using symm key from example!
+    print("Generating SKE key");
+    // Users generate their symmetric keys
+    // SKE.KeyGen -> Ki
     ssk = get_symmetric_key();
     // is called Ki in the Report
 }
@@ -67,7 +43,13 @@ void User::generate_SKE_key() {
 // 1.1 Get the symmetric key from the testvectors.h
 // 1.2 Encrypt user data using the symm-key and PASTA cipher (from pasta_3_plain.cpp)
 void User::encrypt_data() {
-
+    print("Encrypting data");
+    //PASTA_3::PASTA pasta(ssk, 65537); // Todo make work
+    //pasta.encrypt(data);
+    //--- Todo: rewrite myself!!!!
+    // PASTA_3_MODIFIED_1::PASTA SymmetricEncryptor(User.ssk, config::plain_mod);
+    // User.c_i = SymmetricEncryptor.encrypt(User.x_i);
+    // print_vec(User.c_i, User.c_i.size(), "User.c_i");
 }
 
 // 2. Encrypt the symm-key itself
@@ -77,6 +59,11 @@ void User::encrypt_data() {
 //--- 2. Use BFV schemes to encrypt the symmetric key with 
 //--- "PASTA_SEAL::encrypt_key()".
 void User::encrypt_HE_symmetric_key(PublicKey pk) {
+    print("Encrypting HE symmetric key");
+    cout << "pk_A size " << pk.save_size() << endl;
+    // cout << "User encrypts his symmetric key using the Analyst's HE configurations" << endl;
+    // User.c_k = encrypt_symmetric_key(User.ssk, config::USE_BATCH, analyst_he_benc, analyst_he_enc);
+
     // generate a shared symmetric key sk_evk 
     // encrypt the evk using a symmetric key encryption algorithm like AES 
     //  EncapsulatedEvk = SYM.Enc(sk_evk, evk); 

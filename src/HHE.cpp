@@ -3,12 +3,6 @@
 using namespace std;
 using namespace seal;
 
-int HHE::keyGen(int lambda) {
-    //(pk, sk, evk) = HE.KeyGen(lambda);
-    //return (pk, sk, evk);
-    return 0;
-}
-
 SEALContext get_context() {
     //Set the SEAL parameters
     uint64_t plain_mod = 65537;
@@ -39,6 +33,7 @@ SEALContext get_context() {
     }
     parms.set_plain_modulus(plain_mod);
    
+    //shared_ptr<SEALContext> context = make_shared<SEALContext>(parms, true, sec); //Todo check what make shared does!
     SEALContext context(parms);
     return context;
 }

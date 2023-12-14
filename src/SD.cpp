@@ -19,16 +19,15 @@ int main() {
     cout << "Running SD protocol with one Analyst, one User and one CSP" << endl;
 
     // --- Create Entities ---
-    Analyst a(0);
+    Analyst a;
     User u(0);
-    CSP csp(0);
+    CSP csp;
     
     // --- Setup Entities ---
     a.generate_HHE_keys();
     u.generate_SKE_key();
 
     // A send m1 to CSP
-    // m1 = (t1, Enc(pkCSP, evk), sigA(H(t1||evk))))
     message m1 = a.send_m1();
     csp.receive_m1(m1);
 
