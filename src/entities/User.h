@@ -6,7 +6,7 @@ using namespace seal;
 class User {
     public:
         unsigned int id = -1;
-        User(uint64_t id);
+        User(uint64_t id, vector<uint64_t> user_data);
         void generate_SKE_key();
         void encrypt_data();
         void encrypt_HE_symmetric_key(PublicKey pk);
@@ -14,7 +14,7 @@ class User {
     private:
         //--- Todo: from example read over
         vector<uint64_t> ssk; // the secret symmetric keys
-        vector<uint64_t> x_i{0, 1, 2, 3};
+        vector<uint64_t> data; // the plaintext (as vector of integers)
         vector<uint64_t> c_i;        // symmetric encrypted x_i
         std::vector<Ciphertext> c_k; // the HE encrypted symmetric keys
 
@@ -25,10 +25,9 @@ class User {
         }
 };
 
-User::User(uint64_t id_value): id(id_value) {
+User::User(uint64_t id_value, vector<uint64_t> user_data={0, 1, 2, 3}): id(id_value) {
     print("Creating user");
-    vector<uint64_t> tmp_data = {0, 1, 2, 3};
-    data(tmp_data);
+    data = user_data;
 }
 
 void User::generate_SKE_key() {

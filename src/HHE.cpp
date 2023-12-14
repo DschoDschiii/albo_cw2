@@ -3,18 +3,15 @@
 using namespace std;
 using namespace seal;
 
-SEALContext get_context() {
-    //Set the SEAL parameters
-    uint64_t plain_mod = 65537;
-    uint64_t mod_degree = 16384;
-    int seclevel = 128;
-
+inline shared_ptr<SEALContext> HHE::get_seal_context(uint64_t plain_mod = 65537, 
+                                                uint64_t mod_degree = 16384, 
+                                                int seclevel = 128) {
     if (seclevel != 128) throw runtime_error("Security Level not supported");
     seal::sec_level_type sec = seal::sec_level_type::tc128;
     
     seal::EncryptionParameters parms(seal::scheme_type::bfv);
     parms.set_poly_modulus_degree(mod_degree);
-    
+
     if (mod_degree == 65536) {
         sec = seal::sec_level_type::none;
         parms.set_coeff_modulus(
@@ -31,9 +28,9 @@ SEALContext get_context() {
     } else {
         parms.set_coeff_modulus(seal::CoeffModulus::BFVDefault(mod_degree));
     }
+ 
     parms.set_plain_modulus(plain_mod);
-   
-    //shared_ptr<SEALContext> context = make_shared<SEALContext>(parms, true, sec); //Todo check what make shared does!
-    SEALContext context(parms);
+    shared_ptr<SEALContext> context = make_shared<seal::SEALContext>(parms, true, sec);
+
     return context;
 }

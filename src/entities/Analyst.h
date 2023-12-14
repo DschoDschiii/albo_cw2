@@ -16,16 +16,10 @@ class Analyst{
         void decrypt_HHE();
         void print_result();
     private:
-        //--- Todo: from example read over 
-        vector<int64_t> w{17, 31, 24, 17}; // dummy weights
-        vector<int64_t> b{-5, -5, -5, -5}; // dummy biases
-        Ciphertext w_c;                    // the encrypted weights
-        Ciphertext b_c;                    // the encrypted biases
+        HHE hhe; // HHE instance
         SecretKey he_sk;                   // HE Decryption Key
         RelinKeys he_rk;
         GaloisKeys he_gk;
-
-        void init();
 
         void print(string str){
             cout << "[Analyst] " << str << endl;
@@ -34,6 +28,8 @@ class Analyst{
 
 Analyst::Analyst() {
     print("Create Analyst");
+    vector<uint64_t> secret_key;
+    //hhe = HHE(secret_key);
 };
 
 void Analyst::generate_HHE_keys() {
@@ -41,8 +37,7 @@ void Analyst::generate_HHE_keys() {
     // A generates their key
     // Run HHE.KeyGen -> (pkA, skA, evkA)
     //Use Encryption Parameters for the Analyst
-    SEALContext context = get_context();
-    tuple<PublicKey, SecretKey, RelinKeys> ret = HHE::keyGen(context);
+    tuple<PublicKey, SecretKey, RelinKeys> ret = hhe.keyGen();
 
     he_pk = get<0>(ret);
     he_sk = get<1>(ret);
@@ -70,10 +65,11 @@ void Analyst::receive_m4(message m4) {
 //--- "PASTA_SEAL::decrypt_result()" to decrypt it.
 void Analyst::decrypt_HHE() {
     // sets res
+    // vector<int64_t> decrypted_res = decrypting(CSP.c_res, Analyst.he_sk, analyst_he_benc, *context, Analyst.w.size());
 }
 
 void Analyst::print_result() {
-
+    // print_vec(decrypted_res, decrypted_res.size(), "decrypted result");
 }
 
 // BatchEncoder analyst_he_benc(*context);
@@ -82,13 +78,3 @@ void Analyst::print_result() {
 // bool use_bsgs = false;
 // vector<int> gk_indices = add_gk_indices(use_bsgs, analyst_he_benc);
 // keygen.create_galois_keys(gk_indices, Analyst.he_gk);
-// print_line(__LINE__);
-// // Decryptor analyst_he_dec(*context, Analyst.he_sk);
-// print_line(__LINE__);
-// cout << "Analyst encrypts his weights and biases" << endl;
-// print_vec(Analyst.w, Analyst.w.size(), "Analyst.w");
-// print_vec(Analyst.b, Analyst.b.size(), "Analyst.b");
-// Analyst.w_c = encrypting(Analyst.w, Analyst.he_pk, analyst_he_benc, analyst_he_enc);
-// Analyst.b_c = encrypting(Analyst.b, Analyst.he_pk, analyst_he_benc, analyst_he_enc);
-// vector<int64_t> w_d = decrypting(Analyst.w_c, Analyst.he_sk, analyst_he_benc, *context, Analyst.w.size());
-// vector<int64_t> b_d = decrypting(Analyst.b_c, Analyst.he_sk, analyst_he_benc, *context, Analyst.b.size());
