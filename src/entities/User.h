@@ -1,4 +1,5 @@
 #include "seal/seal.h"
+#include "../../thirdparty/ciphers/pasta_3/seal/pasta_3_seal.h"
 #ifndef HHE_H
 #define HHE_H
 #include "HHE.h"
@@ -19,7 +20,7 @@ class User {
         //--- Todo: from example read over
         vector<uint64_t> ssk; // the secret symmetric keys
         vector<uint64_t> data; // the plaintext (as vector of integers)
-        vector<uint64_t> c_i;        // symmetric encrypted x_i
+        vector<uint64_t> c;        // symmetric encrypted data
         std::vector<Ciphertext> c_k; // the HE encrypted symmetric keys
 
         vector<uint64_t> get_symmetric_key();
@@ -47,8 +48,10 @@ void User::generate_SKE_key() {
 // 1.2 Encrypt user data using the symm-key and PASTA cipher (from pasta_3_plain.cpp)
 void User::encrypt_data() {
     print("Encrypting data");
-    PASTA_3::PASTA pasta(ssk, config::plain_mod); // Todo make work
-    //pasta.encrypt(data);
+    //tuple<vector<uint64_t>, vector<uint64_t>> c = HHE::enc(ssk, config::plain_mod);
+    PASTA_3::PASTA pasta(ssk, config::plain_mod);
+    
+    cout << "Size of c: " << c.size() << endl;
     //--- Todo: rewrite myself!!!!
     // PASTA_3_MODIFIED_1::PASTA SymmetricEncryptor(User.ssk, config::plain_mod);
     // User.c_i = SymmetricEncryptor.encrypt(User.x_i);

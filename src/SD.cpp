@@ -23,27 +23,27 @@ int main() {
     
     // --- Setup Entities ---
     a.generate_HHE_keys();
-    u.generate_SKE_key();
+    // u.generate_SKE_key();
 
-    // A send m1 to CSP
-    message m1 = a.send_m1();
-    csp.receive_m1(m1);
+    // // A send m1 to CSP
+    // message m1 = a.send_m1();
+    // csp.receive_m1(m1);
 
-    u.encrypt_data();
-    u.encrypt_HE_symmetric_key(a.he_pk);
-    // 'Send' encrypted data and key to the server
-    message m2 = u.send_m2();
-    csp.receive_m2(m2);
+    // u.encrypt_data();
+    // u.encrypt_HE_symmetric_key(a.he_pk);
+    // // 'Send' encrypted data and key to the server
+    // message m2 = u.send_m2();
+    // csp.receive_m2(m2);
 
-    // ANALYST: Request evaluation function
-    message m3 = a.send_m3();
-    csp.receive_m3(m3);
+    // // ANALYST: Request evaluation function
+    // message m3 = a.send_m3();
+    // csp.receive_m3(m3);
 
-    message m4 = csp.send_m4();
-    a.receive_m4(m4);
+    // message m4 = csp.send_m4();
+    // a.receive_m4(m4);
 
-    a.print_result();
+    // a.print_result();
 
-    cout << "The program works!" << endl;
-    return 0;
+    // cout << "The program works!" << endl;
+    // return 0;
 }

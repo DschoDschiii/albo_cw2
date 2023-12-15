@@ -38,6 +38,7 @@ class HHE {
 
             return context;
         }
+
     public:
         static tuple<PublicKey, SecretKey, RelinKeys> keyGen() {
             SEALContext context = HHE::get_context(config::plain_mod, config::mod_degree, config::seclevel);
@@ -52,7 +53,8 @@ class HHE {
             return make_tuple(pk, sk, eval);
         }
 
-        static tuple<Ciphertext, Ciphertext> enc() {
+        static tuple<Ciphertext, Ciphertext> enc(vector<uint64_t> secret_key, uint64_t modulus, vector<uint64_t> he_pk) {
+            // return make_tuple(enc_key, ciphertext);
             // K <- SKE.Gen(1^lambda)
             // cK <- HE.Enc(pk, K)
             Ciphertext c_k;
